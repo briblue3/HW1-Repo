@@ -1,0 +1,6 @@
+# Ignore any user data directories
+*/data/**
+
+# Ignore any jupyter checkpoint files
+*/.ipynb_checkpoints/**
+
