@@ -11773,88 +11773,82 @@ div#notebook {
   <div tabindex="-1" id="notebook" class="border-box-sizing">
     <div class="container" id="notebook-container">
 
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Alicia Sigmon, als333@pitt.edu, 9/2/2017</p>
+<ul>
+<li>Corpus: Pros and Cons</li>
+<li>Author: Bing Luu</li>
+<li><a href="https://raw.githubusercontent.com/nltk/nltk_data/gh-pages/packages/corpora/pros_cons.zip">https://raw.githubusercontent.com/nltk/nltk_data/gh-pages/packages/corpora/pros_cons.zip</a></li>
+<li>size: 746276, 2 txt files: 1381 KB and 1471 KB</li>
+<li>format: corpus (2 files)</li>
+<li>License: Creative Commons Attribution 4.0 International</li>
+<li>The corpus's 2 files are of positive and negative reviews of technology products</li>
+</ul>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h1 id="Summary-of-Code:">Summary of Code:<a class="anchor-link" href="#Summary-of-Code:">&#182;</a></h1><ul>
+<li>First I read in the 2 files from the Pros and Cons corpus.</li>
+<li>Next I calculated the number of files in the corpus using PlaintextCorpusReader<ul>
+<li>I also practiced this using glob and commented it out - both methods are valid.</li>
+</ul>
+</li>
+<li>Then I printed 200 characters of each text to show what the data looked like.  </li>
+<li>For my basic stats, I started by counting the number of entries for each text file.<ul>
+<li>Because each entry began and ended with markers, I split the file using these parameters to create a list of entries, which I then could use to find the number of entries.      </li>
+</ul>
+</li>
+<li>I then removed the beginning and end markers so that they did not interfere with my word and sentence counts.</li>
+<li>I used nltk to find word tokens, word types, and sentences in the texts.
+  -This data is messy because it comes from online forums. There are a lot of misspellings, missing / extra punctuation, and symbols that interfere with the word and sentence counts.  </li>
+<li>For the discovery, I wanted to know what words and bigrams were most indicative of negative and postive reviews.<ul>
+<li>I looked into frequencies using nltk. I did not remove the punctuation, so many of the most frequent words and bigrams included punctuation.</li>
+</ul>
+</li>
+</ul>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h1 id="Future-wish:">Future wish:<a class="anchor-link" href="#Future-wish:">&#182;</a></h1><p>I think it would be interesting to look at spelling errors in this corpus.
+Did people tend to make more errors in negative or positive reviews? 
+I'm not sure how to look at spelling errors in a corpus like this 
+because it is full of correct and incorrect spellings and extra symbols. 
+We previously looked at minimum edit distance and spell correct in the Introduction to Computational Lingustics course, 
+and I wonder how I would delve into a corpus looking for how often people make errors.</p>
+<p>Some issues with this idea are that it's likely that some people inputting their entries had spell 
+checkers while others didn't, and they would have been different spell checkers regardless.
+If I were able to look at spelling errors in this corpus, it would therefore not be possible to generalize to 
+erros in pro and con entries in general, but I could see in this corpus how many words in 
+each category had spelling errors. To really look into spelling erros in pros and cons entries, 
+the corpus would have to include people that had the same spell checker.</p>
+<p>Also, how would we compare the words to correctly spelled words? One idea I have is using 
+a corpus of English words or maybe also a corpus of English slang to compare to the words in the Pros and Cons 
+corpus. I'm not sure what the code would look like, and when I try to imagine it, it seems like each word type in the 
+Pros and Cons corpus would have to be compared to words in English Words/Slang corpora to check for errors, 
+which would take a very long time to run.</p>
+
+</div>
+</div>
+</div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
 <div class="prompt input_prompt">In&nbsp;[1]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># Alicia Sigmon, als333@pitt.edu, 9/2/2017</span>
-
-<span class="c1"># Corpus: Pros and Cons</span>
-<span class="c1"># Author: Bing Luu</span>
-<span class="c1"># https://raw.githubusercontent.com/nltk/nltk_data/gh-pages/packages/corpora/pros_cons.zip</span>
-<span class="c1"># size: 746276, 2 txt files: 1381 KB and 1471 KB</span>
-<span class="c1"># format: corpus (2 files)</span>
-<span class="c1"># License: Creative Commons Attribution 4.0 International</span>
-<span class="c1"># The corpus&#39;s 2 files are of positive and negative reviews of technology products</span>
-</pre></div>
-
-</div>
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[2]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># Summary of Code:</span>
-
-    <span class="c1"># First I read in the 2 files from the Pros and Cons corpus.</span>
-    <span class="c1"># Then I printed 200 characters of each text to show what the data looked like.</span>
-    
-    <span class="c1"># For my basic stats, I started by counting the number of entries for each text file.</span>
-        <span class="c1"># Because each entry began with &lt;Cons&gt; and ended with &lt;/Cons&gt;\n,</span>
-        <span class="c1"># I split the file using these parameters to create a list of entries, which I then</span>
-        <span class="c1"># could use to find the number of entries.</span>
-    <span class="c1"># I then removed the beginning and end markers so that they did not interfere with my word and sentence counts.</span>
-    <span class="c1"># I used nltk to find word tokens, word types, and sentences in the texts.</span>
-        <span class="c1"># This data is messy because it comes from online forums. There are a lot of misspellings,</span>
-        <span class="c1"># missing / extra punctuation, and symbols that interfere with the word and sentence counts.</span>
-    <span class="c1"># For the discovery, I looked into frequencies (again using nltk). I did not remove the punctuation, so many of the </span>
-        <span class="c1"># most frequent words and bigrams included punctuation.</span>
-</pre></div>
-
-</div>
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[3]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># Future wish:</span>
-
-    <span class="c1"># I think it would be interesting to look at spelling errors in this corpus. Did people tend to make</span>
-        <span class="c1"># more errors in negative or positive reviews? I&#39;m not sure how to look at spelling errors in a corpus like this</span>
-        <span class="c1"># because it is full of correct and incorrect spellings and extra symbols. We previously</span>
-        <span class="c1"># looked at minimum edit distance and spell correct in the Introduction to Computational Lingustics course, </span>
-        <span class="c1"># and I wonder how I would delve into a corpus looking for how often people make errors.</span>
-        
-        <span class="c1"># Some issues with this idea are that it&#39;s likely that some people inputting their entries had spell</span>
-        <span class="c1"># checkers while others didn&#39;t, and they would have been different spell checkers regardless.</span>
-        <span class="c1"># If I were able to look at spelling errors in this corpus, it would therefore not be possible to generalize to</span>
-        <span class="c1"># erros in pro and con entries in general, but I could see in this corpus how many words in </span>
-        <span class="c1"># each category had spelling errors. To really look into spelling erros in pros and cons entries, </span>
-        <span class="c1"># the corpus would have to include people that had the same spell checker. </span>
-        <span class="c1"># Also, how would we compare the words to correctly spelled words? One idea I have is using</span>
-        <span class="c1"># a corpus of English words or maybe also a corpus of English slang to compare to the words in the Pros and Cons </span>
-        <span class="c1"># corpus. I&#39;m not sure what the code would look like, and when I try to imagine it, it seems like each word type in the</span>
-        <span class="c1"># Pros and Cons corpus would have to be compared to words in English Words/Slang corpora to check for errors,</span>
-        <span class="c1"># which would take a very long time to run.</span>
-</pre></div>
-
-</div>
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[4]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># Reading in the data</span>
@@ -11874,11 +11868,72 @@ div#notebook {
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[5]:</div>
+<div class="prompt input_prompt">In&nbsp;[2]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># Getting the fileids and counting the number of files</span>
+<span class="c1"># Option 1: Using PlaintextCorpusReader</span>
+<span class="kn">from</span> <span class="nn">nltk.corpus</span> <span class="k">import</span> <span class="n">PlaintextCorpusReader</span>
+<span class="n">corpus_root</span> <span class="o">=</span> <span class="s1">&#39;data&#39;</span>
+<span class="n">corpus</span> <span class="o">=</span> <span class="n">PlaintextCorpusReader</span><span class="p">(</span><span class="n">corpus_root</span><span class="p">,</span> <span class="s1">&#39;.*&#39;</span><span class="p">)</span>
+<span class="c1">#dir(corpus)</span>
+<span class="c1">#corpus.raw()[:500]</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;There are &quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">corpus</span><span class="o">.</span><span class="n">fileids</span><span class="p">()))</span> <span class="o">+</span> <span class="s2">&quot; files in this corpus:&quot;</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">corpus</span><span class="o">.</span><span class="n">fileids</span><span class="p">():</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\t</span><span class="s2">&quot;</span><span class="o">+</span><span class="n">x</span><span class="p">)</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+<div class="prompt"></div>
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>There are 2 files in this corpus:
+	IntegratedCons.txt
+	IntegratedPros.txt
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[3]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># Option 2: Using glob</span>
+
+<span class="c1">#import glob</span>
+<span class="c1">#files = glob.glob(&#39;data\*.txt&#39;)</span>
+<span class="c1">#print(&quot;There are &quot; + str(len(files)) + &quot; files in this corpus:&quot;)</span>
+<span class="c1">#for x in files:</span>
+<span class="c1">#    print(&quot;\t&quot;+x.replace(&quot;data\\&quot;, &quot;&quot;))</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[4]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># Looking at the data</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Cons Preview:&quot;</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="n">constxt</span><span class="p">[:</span><span class="mi">200</span><span class="p">])</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Pros Preview:&quot;</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="n">prostxt</span><span class="p">[:</span><span class="mi">200</span><span class="p">])</span>
 </pre></div>
 
@@ -11894,9 +11949,11 @@ div#notebook {
 <div class="prompt"></div>
 
 <div class="output_subarea output_stream output_stdout output_text">
-<pre>        &lt;Cons&gt;East batteries! On-off switch too easy to maneuver.&lt;/Cons&gt;
+<pre>Cons Preview:
+        &lt;Cons&gt;East batteries! On-off switch too easy to maneuver.&lt;/Cons&gt;
         &lt;Cons&gt;Eats...no, GULPS batteries&lt;/Cons&gt;
         &lt;Cons&gt;Awkward ergonomics, no optical viewfinder, short battery life, sl
+Pros Preview:
         &lt;Pros&gt;Easy to use, economical!&lt;/Pros&gt;
         &lt;Pros&gt;Digital is where it&#39;s at...down with developing film!&lt;/Pros&gt;
         &lt;Pros&gt;Good image quality, 3x optical zoom, macro mode, inexpensive&lt;/Pro
@@ -11910,15 +11967,13 @@ div#notebook {
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[6]:</div>
+<div class="prompt input_prompt">In&nbsp;[5]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># Basic Stats</span>
 
 <span class="c1">#nltk.download()</span>
 <span class="kn">import</span> <span class="nn">nltk</span>
-
-<span class="c1">#Number of files???</span>
 
 <span class="c1">#Splits the files by entry</span>
 <span class="n">cons_split</span> <span class="o">=</span> <span class="n">constxt</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">&quot;&lt;Cons&gt;&quot;</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;&lt;/Cons&gt;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
@@ -11929,7 +11984,7 @@ div#notebook {
 <span class="n">new_prostxt</span> <span class="o">=</span> <span class="n">prostxt</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">&quot;&lt;Pros&gt;&quot;</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">&quot;&lt;/Pros&gt;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">)</span>
 
 <span class="c1"># These include many things that are not words or not sentences</span>
-    <span class="c1"># Is there a way to fix this when there are so many typos / missing punctuation?</span>
+    <span class="c1"># Would be best to remove punction / symbols</span>
 <span class="n">contoks</span> <span class="o">=</span> <span class="n">nltk</span><span class="o">.</span><span class="n">word_tokenize</span><span class="p">(</span><span class="n">new_constxt</span><span class="o">.</span><span class="n">lower</span><span class="p">())</span>
 <span class="n">contypes</span> <span class="o">=</span> <span class="nb">sorted</span><span class="p">(</span><span class="nb">set</span><span class="p">(</span><span class="n">contoks</span><span class="p">))</span>
 <span class="n">consents</span> <span class="o">=</span> <span class="n">nltk</span><span class="o">.</span><span class="n">sent_tokenize</span><span class="p">(</span><span class="n">new_constxt</span><span class="p">)</span>
@@ -11945,7 +12000,7 @@ div#notebook {
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[7]:</div>
+<div class="prompt input_prompt">In&nbsp;[6]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="c1">#Printing basic stats from above - plus using numpy.sum() </span>
@@ -11997,7 +12052,7 @@ There are 6956 pro sentence tokens.
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[8]:</div>
+<div class="prompt input_prompt">In&nbsp;[7]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># Discovery Part 1: </span>
@@ -12105,7 +12160,7 @@ Pro frequency of &#34;!&#34;: 0.008915102805007591
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[9]:</div>
+<div class="prompt input_prompt">In&nbsp;[8]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># Discovery Part 2:</span>
