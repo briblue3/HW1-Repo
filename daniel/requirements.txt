@@ -1,3 +1,3 @@
-gensim
 nltk
 numpy
+sklearn
