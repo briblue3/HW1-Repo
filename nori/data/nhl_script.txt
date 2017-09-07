@@ -1,0 +1,137 @@
+import os
+
+import textstats
+
+os.chdir('C:\\Users\\Noriyasu\\Documents\\Data_Science\\HW1-Repo\\nori\\data')
+#all four corpus files are in this folder
+
+#assign file names for the text files of the 3 L2 learner groups
+a = open('W_CHN_PTJ_A2_0.txt', 'r') #china
+china = a.read()
+a.close()
+b = open('W_JPN_PTJ_A2_0.txt', 'r') #japan
+japan = b.read()
+b.close()
+c = open('W_KOR_PTJ_A2_0.txt', 'r') #korea
+korea = c.read()
+c.close()
+d = open('W_ENS_PTJ_XX1.txt', 'r') #english comparison
+english = d.read()
+d.close()
+
+print('there are', len(china), 'characters in the chinese corpus')
+print('there are', len(japan), 'characters in the japaense corpus')
+print('there are', len(korea), 'characters in the korean corpus')
+
+print('here is a snippet of the first 1000 characters in the chinese data: ', china[:1000])
+print('here is a snippet of the first 1000 characters in the japaense data: ', japan[:1000])
+print('here is a snippet of the first 1000 characters in the korean data: ', korea[:1000])
+
+china.split()
+japan.split()
+korea.split()
+
+#well, i did this, and each time it killed my shell...i think
+#their writing is actually pretty good from the first 1000 characters. But one will notice some article errors, which is common in East Asian Language L1s.
+#there is a lot of data from the files though, the first 1000 characters don't tell us much.
+#still working on this file...
+
+
+
+
+
+
+### i wanted to run something like we did in textstats in 2330 but i couldn't figure out why it wouldn't run on my computer...
+
+#list names
+china = []
+english = []
+japan = []
+korea = []
+
+#dictionary of texts
+chtxt = {}
+for w in china:
+    f = open(w, encoding='utf-8')
+    txt = f.read()
+    f.close()
+    fname = w
+    chtxt[fname] = txt
+
+jptxt = {}
+for w in japan:
+    f = open(w, encoding='utf-8')
+    txt = f.read()
+    f.close()
+    fname = w
+    jptxt[fname] = txt
+
+kotxt = {}
+for w in korea:
+    f = open(w, encoding='utf-8')
+    txt = f.read()
+    f.close()
+    fname = w
+    kotxt[fname] = txt
+
+entxt = {}
+for w in english:
+    f = open(w, encoding='utf-8')
+    txt = f.read()
+    f.close()
+    fname = w
+    entxt[fname] = txt
+
+#building code for tokenized word lists
+allchtxt = " ".join(chtxt.values())
+chtoks = getTokens(allchtxt)
+alljptxt = " ".join(jptxt.values())
+jptoks = getTokens(alljptxt)
+allkotxt = " ".join(kotxt.values())
+kotoks = getTokens(allkotxt)
+allentxt = " ".join(entxt.values())
+entoks = getTokens(allentxt)
+
+#frquency dictionaries
+chfreq = getFreq(chtoks)
+jpfreq = getFreq(jptoks)
+kofreq = getFreq(kotoks)
+enfreq = getFreq(entoks)
+
+#token lists of real words and excluding punctuation and symbols
+chtoks_ex = [x for x in chtoks if x.isalnum()]
+chtypes_ex = [x for x in chfreq if x.isalnum()]
+jptoks_ex = [x for x in jptoks if x.isalnum()]
+jptypes_ex = [x for x in jpfreq if x.isalnum()]
+kotoks_ex = [x for x in kotoks if x.isalnum()]
+kotypes_ex = [x for x in kofreq if x.isalnum()]
+entoks_ex = [x for x in entoks if x.isalnum()]
+entypes_ex = [x for x in enfreq if x.isalnum()]
+
+#corpus information
+print('the chinese corpus size is', len(chtoks_ex), 'tokens long')
+print('the japanese corpus size is', len(jptoks_ex), 'tokens long')
+print('the korean corpus size is', len(kotoks_ex), 'tokens long')
+print('the english comparison corpus is', len(entoks_ex), 'tokens long')
+
+#average essays
+#questions = is there a way to look at this based on how many line breaks there are?
+#once i figure this out, enter into the code
+print('average length of chinese corpus is', len(chtoks_ex)/14)
+print('average length of japanese corpus is', len(jptoks_ex)/30)
+print('average length of korean corpus is', len(kotoks_ex)/6)
+print('average length of english corpus is', len(entoks_ex)/50)
+
+#calculate the average sentence length
+print('average sentences of chinese corpus is', len(chtoks_ex)/14)
+print('average sentences of japanese corpus is', len(jptoks_ex)/30)
+print('average sentences of korean corpus is', len(kotoks_ex)/6)
+print('average sentences of english corpus is', len(entoks_ex)/50)
+
+#TTR
+print('TTR of ch is', len(chtypes_ex)/len(chtoks_ex))
+print('TTR of jp is', len(jptypes_ex)/len(jptoks_ex))
+print('TTR of ko is', len(kotypes_ex)/len(kotoks_ex))
+print('TTR of en is', len(entypes_ex)/len(entoks_ex))
+
+
